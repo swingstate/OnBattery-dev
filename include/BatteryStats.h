@@ -122,15 +122,19 @@ class VictronSmartShuntStats : public BatteryStats {
         void updateFrom(VeDirectShuntController::veShuntStruct const& shuntData);
 
     private:
-        float _voltage;
-        float _current;
-        float _temperature;
+        float_t _voltage;
+        float_t _current;
+        float_t _temperature;
         bool _tempPresent;
         uint8_t _chargeCycles;
         uint32_t _timeToGo;
-        float _chargedEnergy;
-        float _dischargedEnergy;
+        float_t _chargedEnergy;
+        float_t _dischargedEnergy;
         String _modelName;
+        float_t _midpointVoltage;
+        float_t _midpointDeviation;
+        float_t _instantaneousPower;
+        float_t _consumedAmpHours;
 
         bool _alarmLowVoltage;
         bool _alarmHighVoltage;

@@ -41,7 +41,7 @@ void BatteryStats::getLiveViewData(JsonVariant& root) const
     root[F("manufacturer")] = _manufacturer;
     root[F("data_age")] = getAgeSeconds();
 
-    addLiveViewValue(root, "SoC", _SoC, "%", 0);
+    addLiveViewValue(root, "SoC", _SoC, "%", 1);
 }
 
 void PylontechBatteryStats::getLiveViewData(JsonVariant& root) const
@@ -338,6 +338,10 @@ void VictronSmartShuntStats::updateFrom(VeDirectShuntController::veShuntStruct c
     _manufacturer = "Victron " + _modelName;
     _temperature = shuntData.T;
     _tempPresent = shuntData.tempPresent;
+    _midpointVoltage = shuntData.VM / 1000;
+    _midpointDeviation = shuntData.DM;
+    _instantaneousPower = shuntData.P;
+    _consumedAmpHours = shuntData.CE / 1000;
 
     // shuntData.AR is a bitfield, so we need to check each bit individually
     _alarmLowVoltage = shuntData.AR & 1;
@@ -357,8 +361,8 @@ void VictronSmartShuntStats::getLiveViewData(JsonVariant& root) const {
     addLiveViewValue(root, "voltage", _voltage, "V", 2);
     addLiveViewValue(root, "current", _current, "A", 1);
     addLiveViewValue(root, "chargeCycles", _chargeCycles, "", 0);
-    addLiveViewValue(root, "chargedEnergy", _chargedEnergy, "KWh", 1);
-    addLiveViewValue(root, "dischargedEnergy", _dischargedEnergy, "KWh", 1);
+    addLiveViewValue(root, "chargedEnergy", _chargedEnergy, "KWh", 2);
+    addLiveViewValue(root, "dischargedEnergy", _dischargedEnergy, "KWh", 2);
     if (_tempPresent) {
         addLiveViewValue(root, "temperature", _temperature, "°C", 0);
     }
@@ -378,4 +382,9 @@ void VictronSmartShuntStats::mqttPublish() const {
     MqttSettings.publish(F("battery/chargeCycles"), String(_chargeCycles));
     MqttSettings.publish(F("battery/chargedEnergy"), String(_chargedEnergy));
     MqttSettings.publish(F("battery/dischargedEnergy"), String(_dischargedEnergy));
+    MqttSettings.publish(F("battery/midpointVoltage"), String(_midpointVoltage));
+    MqttSettings.publish(F("battery/midpointDeviation"), String(_midpointDeviation));
+    MqttSettings.publish(F("battery/instantaneousPower"), String(_instantaneousPower));
+    MqttSettings.publish(F("battery/consumpedAmpHours"), String(_consumedAmpHours));
 }
+

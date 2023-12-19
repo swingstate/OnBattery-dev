@@ -94,6 +94,12 @@ void VeDirectShuntController::textRxEvent(char* name, char* value)
 	else if (strcmp(name, "H18") == 0) {
 		_tmpFrame.H18 = atoi(value);
 	}
+	else if (strcmp(name, "VM") == 0) {
+		_tmpFrame.VM = atoi(value);
+	}
+	else if (strcmp(name, "DM") == 0) {
+		_tmpFrame.DM = atoi(value);
+	}
 }
 
 /*
