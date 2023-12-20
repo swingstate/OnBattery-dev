@@ -62,6 +62,10 @@ void MqttHandlePylontechHassClass::publishConfig()
     publishSensor("Charge voltage (BMS)", NULL, "settings/chargeVoltage", "voltage", "measurement", "V");
     publishSensor("Charge current limit", NULL, "settings/chargeCurrentLimitation", "current", "measurement", "A");
     publishSensor("Discharge current limit", NULL, "settings/dischargeCurrentLimitation", "current", "measurement", "A");
+    publishSensor("SmartShunt battery midpoint", NULL, "midpointVoltage", "battery", "measurement", "V");
+    publishSensor("SmartShunt battery midpoint Deviation", NULL, "midpointDeviation", "battery", "measurement", "%");
+    publishSensor("SmartShunt Instantaneous Power", NULL, "instantaneousPower", "battery", "measurement", "W");
+    publishSensor("SmartShunt Consumed AmpHours", NULL, "consumpedAmpHours", "battery", "measurement", "Ah");
 
     publishBinarySensor("Alarm Discharge current", "mdi:alert", "alarm/overCurrentDischarge", "1", "0");
     publishBinarySensor("Warning Discharge current", "mdi:alert-outline", "warning/highCurrentDischarge", "1", "0");
