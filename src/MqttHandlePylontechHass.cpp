@@ -64,7 +64,7 @@ void MqttHandlePylontechHassClass::publishConfig()
     publishSensor("Discharge current limit", NULL, "settings/dischargeCurrentLimitation", "current", "measurement", "A");
     publishSensor("SmartShunt battery midpoint", NULL, "midpointVoltage", "voltage", "measurement", "V");
     publishSensor("SmartShunt battery midpoint Deviation", NULL, "midpointDeviation", "battery", "measurement", "%");
-    publishSensor("SmartShunt Instantaneous Power", NULL, "instantaneousPower", "energy", "measurement", "W");
+    publishSensor("SmartShunt Instantaneous Power", NULL, "instantaneousPower", "power", "measurement", "W");
     publishSensor("SmartShunt Consumed AmpHours", NULL, "consumpedAmpHours", "energy", "measurement", "Ah");
     publishSensor("SmartShunt Total Charged Energy", NULL, "chargedEnergy", "energy", "total_increasing", "kWh");
     publishSensor("SmartShunt Total DisCharged Energy", NULL, "dischargedEnergy", "energy", "total_increasing", "kWh");
